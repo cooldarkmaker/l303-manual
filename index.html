@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L303 测光表使用说明书</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --paper: #fffdf8;
+      --ink: #1f1b16;
+      --muted: #6a6257;
+      --line: #d8cdbd;
+      --accent: #9f3d22;
+      --accent-soft: #f3ddd4;
+      --shadow: 0 18px 45px rgba(58, 44, 28, 0.12);
+      --radius: 20px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(159, 61, 34, 0.08), transparent 28%),
+        linear-gradient(180deg, #f7f2e8 0%, #efe7da 100%);
+      line-height: 1.7;
+    }
+
+    .hero {
+      padding: 56px 20px 28px;
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(248, 241, 230, 0.96));
+      border: 1px solid rgba(159, 61, 34, 0.12);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .hero-copy {
+      padding: 40px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin: 0 0 16px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      margin-top: 18px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 26px;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 56ch;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .hero-points div {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(159, 61, 34, 0.1);
+      font-size: 14px;
+    }
+
+    .hero-visual {
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(31, 27, 22, 0.04), rgba(31, 27, 22, 0.01));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual img,
+    .image-card img {
+      display: block;
+      width: 100%;
+      background: #000;
+      image-rendering: pixelated;
+      object-fit: contain;
+    }
+
+    .hero-visual img {
+      max-width: 420px;
+      border-radius: 20px;
+      border: 1px solid rgba(31, 27, 22, 0.08);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+    }
+
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .toc-card {
+      background: var(--paper);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      padding: 24px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: var(--ink);
+      text-decoration: none;
+      background: #faf6ee;
+      border: 1px solid #eadfce;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .toc a:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: #fff8f2;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px 48px;
+    }
+
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px 24px;
+      margin-bottom: 22px;
+      scroll-margin-top: 24px;
+    }
+
+    ul, ol {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      padding: 1px 5px;
+      border-radius: 6px;
+      background: #f4ede3;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: #fff6f2;
+      border-radius: 12px;
+      color: #5a4035;
+      margin: 16px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .image-card {
+      background: #fbf7f0;
+      border: 1px solid #e7dbc8;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .image-card img {
+      width: min(100%, 420px);
+      height: 210px;
+      margin: 0 auto;
+    }
+
+    .image-card .caption {
+      padding: 14px 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #faf6ee;
+      border: 1px solid #eadfce;
+    }
+
+    .step strong {
+      color: var(--accent);
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-inner,
+      .grid-2,
+      .toc-grid,
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      section,
+      .toc-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="hero-kicker">L303 LIGHT METER MANUAL</span>
+        <h1>L303 测光表使用说明书</h1>
+        <div class="hero-points">
+          <div>支持 <code>AV</code>、<code>TV</code>、<code>ISO</code>、<code>EV</code> 调整</div>
+          <div>支持单次测光与实时测光</div>
+          <div>支持档位启停、亮度调节与 Dark Mode</div>
+          <div>支持自动休眠、按键唤醒与电池充电显示</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="ui_screens/preview/main.png" alt="L303 测光表">
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-card">
+      <h2>目录</h2>
+      <div class="toc-grid">
+        <a href="#overview">1. 产品概述</a>
+        <a href="#operation">2. 操作方式</a>
+        <a href="#metering">3. 开机与测光</a>
+        <a href="#launcher">4. 主页面进入功能</a>
+        <a href="#params">5. 参数设置</a>
+        <a href="#settings">6. 设置菜单</a>
+        <a href="#about">7. About 页面</a>
+        <a href="#battery">8. 电池与充电显示</a>
+        <a href="#sleep">9. 休眠与唤醒</a>
+        <a href="#tips">10. 使用建议</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <h2>1. 产品概述</h2>
+      <p>L303 是全金属单拨盘反射式测光表，当前固件具备以下功能：</p>
+      <ul>
+        <li><code>AV</code> 光圈优先测光</li>
+        <li><code>TV</code> 快门优先测光</li>
+        <li><code>ISO</code> 设置</li>
+        <li><code>EV</code> 曝光补偿设置</li>
+        <li>单次测光与实时测光</li>
+        <li>光圈档位与快门档位启用/禁用</li>
+        <li>自动/手动亮度与屏幕反色显示</li>
+        <li>自动休眠、按键唤醒、电池与充电显示</li>
+      </ul>
+    </section>
+
+    <section id="operation">
+      <h2>2. 操作方式</h2>
+      <p>本机当前交互基于 1 个按键和 1 个磁编码器旋钮。</p>
+
+      <h3>按键逻辑</h3>
+      <ul>
+        <li><strong>短按</strong>：主测光页触发测光；菜单或列表页用于进入、确认或切换当前项目。</li>
+        <li><strong>长按</strong>：主测光页进入功能启动器；子页面或列表页返回上一级。</li>
+      </ul>
+
+      <h3>旋钮逻辑</h3>
+      <ul>
+        <li>主测光页中，<code>AV</code> 模式调光圈，<code>TV</code> 模式调快门。</li>
+        <li>菜单或列表页中，用于移动光标或切换当前选项。</li>
+        <li>亮度窗口中，在手动模式下调节亮度等级。</li>
+      </ul>
+    </section>
+
+    <section id="metering">
+      <h2>3. 开机与测光</h2>
+
+      <h3>3.1 主测光页</h3>
+      <p>主页面会显示当前 <code>ISO</code>、快门值、光圈值、<code>EV</code>、模式箭头、<code>∞</code> 连续测光图标以及电池图标。</p>
+      <div class="grid-2">
+        <div class="image-card">
+          <img src="ui_screens/raw/01_home_av.png" alt="AV 模式主页面">
+          <div class="caption">AV 模式：旋钮调光圈，屏幕给出对应快门结果。</div>
+        </div>
+        <div class="image-card">
+          <img src="ui_screens/raw/02_home_tv_live.png" alt="TV 模式主页面">
+          <div class="caption">TV 模式：旋钮调快门，屏幕给出对应光圈结果。</div>
+        </div>
+      </div>
+      <div class="note">超出可用范围时会显示异常提示，表示结果不可用。</div>
+
+      <h3>3.2 测光方式</h3>
+      <ul>
+        <li><code>Live Meter</code> 关闭时：主页面短按按键触发一次测光，完成后界面会短暂闪烁提示。</li>
+        <li><code>Live Meter</code> 打开时：环境光会周期性刷新，主页面短按按键不再执行单次测光流程。</li>
+      </ul>
+    </section>
+
+    <section id="launcher">
+      <h2>4. 主页面进入功能</h2>
+      <p>在主测光页长按按键，可进入启动器页面。</p>
+      <div class="image-card">
+        <img src="ui_screens/raw/launcher_icon_line.png" alt="功能启动器图标">
+        <div class="caption">启动器当前包含 Home、ISO、MODE、EV、SET、About 六个入口。</div>
+      </div>
+      <ul style="margin-top: 18px;">
+        <li><strong>Home</strong>：返回主测光页</li>
+        <li><strong>ISO</strong>：设置感光度</li>
+        <li><strong>MODE</strong>：切换 <code>AV / TV</code></li>
+        <li><strong>EV</strong>：设置曝光补偿</li>
+        <li><strong>SET</strong>：进入设置菜单</li>
+        <li><strong>About</strong>：查看版本、型号、传感器与当前照度</li>
+      </ul>
+    </section>
+
+    <section id="params">
+      <h2>5. 参数设置</h2>
+
+      <h3>5.1 ISO</h3>
+      <p>当前可选 ISO：</p>
+      <p><code>6, 12, 25, 50, 64, 80, 100, 125, 160, 200, 250, 320, 400, 500, 600, 800, 1600, 3200, 6400</code></p>
+
+      <h3>5.2 模式</h3>
+      <ul>
+        <li><code>AV</code>：光圈优先</li>
+        <li><code>TV</code>：快门优先</li>
+      </ul>
+      <div class="note"><code>EV</code> 在当前固件中是曝光补偿项，不是独立测光模式。</div>
+
+      <h3>5.3 EV 曝光补偿</h3>
+      <p>当前可选范围为 <code>-3.0 EV</code> 到 <code>+3.0 EV</code>，步进 <code>0.5 EV</code>。</p>
+      <p><code>-3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0, +0.5, +1.0, +1.5, +2.0, +2.5, +3.0</code></p>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="image-card">
+          <img src="ui_screens/raw/20_iso_wheel.png" alt="ISO 设置页面">
+          <div class="caption">ISO 选择页面。</div>
+        </div>
+        <div class="image-card">
+          <img src="ui_screens/raw/21_mode_wheel.png" alt="模式设置页面">
+          <div class="caption">MODE 选择页面，仅在 AV 与 TV 间切换。</div>
+        </div>
+      </div>
+      <div class="image-card" style="margin-top: 18px;">
+        <img src="ui_screens/raw/22_ev_wheel.png" alt="EV 设置页面">
+        <div class="caption">EV 曝光补偿页面。</div>
+      </div>
+    </section>
+
+    <section id="settings">
+      <h2>6. 设置菜单</h2>
+      <p><code>SET</code> 菜单会根据当前硬件状态显示以下项目：</p>
+      <ul>
+        <li><code>Aperture Set</code></li>
+        <li><code>Shutter Set</code></li>
+        <li><code>Live Meter</code></li>
+        <li><code>Dark Mode</code></li>
+        <li><code>Brightness</code></li>
+        <li><code>Sleep Time</code></li>
+      </ul>
+
+      <div class="image-card">
+        <img src="ui_screens/raw/30_set_menu_opt3001.png" alt="设置菜单">
+        <div class="caption">设置菜单示意。</div>
+      </div>
+
+      <h3>6.1 Aperture Set</h3>
+      <ul>
+        <li>用于启用或禁用光圈档位。</li>
+        <li>支持档位：<code>F1, 1.2, 1.4, 1.8, 2, 2.4, 2.8, 3, 3.2, 3.5, 4, 4.5, 5, 5.6, 6.3, 7.1, 8, 9, 10, 11, 13, 14, 16, 18, 20, 22, 26, 28, 32, 36, 40, 45, 52, 56, 64</code></li>
+        <li>进入页面后旋钮切换档位，短按切换 <code>ON/OFF</code>。</li>
+        <li>固件至少保留 2 个启用档位，不能全部关闭。</li>
+      </ul>
+
+      <h3>6.2 Shutter Set</h3>
+      <ul>
+        <li>用于启用或禁用快门档位。</li>
+        <li>支持档位：<code>1, 2, 4, 8, 15, 30, 60, 125, 250, 500, 1000, 2000</code></li>
+        <li>进入页面后旋钮切换档位，短按切换 <code>ON/OFF</code>。</li>
+        <li>同样至少保留 2 个启用档位。</li>
+      </ul>
+
+      <h3>6.3 Live Meter</h3>
+      <ul>
+        <li>打开后：照度持续刷新。</li>
+        <li>关闭后：使用单次测光流程。</li>
+      </ul>
+
+      <h3>6.4 Dark Mode</h3>
+      <ul>
+        <li>打开：反色显示。</li>
+        <li>关闭：普通显示。</li>
+      </ul>
+
+      <h3>6.5 Brightness</h3>
+      <ul>
+        <li>进入后弹出亮度窗口。</li>
+        <li><code>A</code>：自动亮度。</li>
+        <li><code>M</code>：手动亮度。</li>
+        <li>短按按键切换 <code>A / M</code>。</li>
+        <li>在 <code>M</code> 模式下旋转旋钮调节亮度 <code>1</code> 到 <code>10</code>。</li>
+      </ul>
+
+      <h3>6.6 Sleep Time</h3>
+      <ul>
+        <li>可选：<code>1 min</code>、<code>2 min</code>、<code>4 min</code></li>
+        <li>默认值：<code>2 min</code></li>
+      </ul>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="image-card">
+          <img src="ui_screens/raw/32_sleep_menu.png" alt="休眠时间设置">
+          <div class="caption">Sleep Time 选择页面。</div>
+        </div>
+        <div class="image-card">
+          <img src="ui_screens/raw/33_aperture_menu.png" alt="光圈档位设置">
+          <div class="caption">Aperture Set 页面，旋钮切换档位，短按切换启停。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>7. About 页面</h2>
+      <p><code>About</code> 页面当前显示以下信息：</p>
+      <ul>
+        <li>产品名 <code>Cooldark Meter</code></li>
+        <li>固件版本 <code>FW 260526</code></li>
+        <li>硬件版本 <code>HW Rev.1.5</code></li>
+        <li>型号 <code>L303</code></li>
+        <li>类型 <code>Reflected Light Meter</code></li>
+        <li>当前识别到的传感器名称</li>
+        <li>当前照度值</li>
+      </ul>
+      <div class="image-card">
+        <img src="ui_screens/raw/34_about_page.png" alt="About 页面">
+        <div class="caption">About 页面可用于查看版本、型号、传感器与照度信息。</div>
+      </div>
+    </section>
+
+    <section id="battery">
+      <h2>8. 电池与充电显示</h2>
+      <ul>
+        <li>主页面右上角显示电池图标。</li>
+        <li>充电时电池图标会动态变化。</li>
+      </ul>
+    </section>
+
+    <section id="sleep">
+      <h2>9. 休眠与唤醒</h2>
+      <ul>
+        <li>无操作一段时间后，设备会关闭 OLED 并进入深度休眠。</li>
+        <li>休眠前会关闭传感器电源。</li>
+        <li>按键可将设备唤醒。</li>
+        <li>唤醒后会重新初始化屏幕、传感器与 UI。</li>
+        <li>非实时测光模式下，唤醒后会自动重新测光一次。</li>
+      </ul>
+      <div class="note">当前 <code>About</code> 页面下不会触发自动休眠。</div>
+    </section>
+
+    <section id="tips">
+      <h2>10. 使用建议</h2>
+      <div class="steps">
+        <div class="step"><strong>反射式测光</strong><br>建议尽量按被摄体反射光环境进行测量。</div>
+        <div class="step"><strong>逆光场景</strong><br>逆光建议靠近被摄物测光，避开逆光干扰，如果无法靠近被摄物应当加两档曝光。</div>
+        <div class="step"><strong>提升效率</strong><br>如果常用镜头或快门范围固定，可在 <code>Aperture Set</code> / <code>Shutter Set</code> 中关闭不常用档位。</div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
